@@ -1,24 +1,31 @@
 //importacion fs, todo lo necesatio para grabar un archivo
 
 const fs = require('fs');
+const colors = require('colors');
+
 
 
 //funcion para crear archivos de multiplicar
 //convertirla en funcion asyn que por defecto maneja una promesa
-const crearArchivo = async( base = 5) => {
+const crearArchivo = async( base = 5, listar = false, hasta = 10) => {
     //enbarcar el try y catch para manejar en caso de errores
-    try {
-        console.log(' Tabla del:', base );
-    
-        let salida = '';
-        for( let i = 1; i<=10; i++) {
-            salida +=(`${base} x ${ i } = ${ base * i }\n`);
+    try {    
+        let salida, consola = '';
+
+        for( let i = 1; i<=hasta; i++) {
+            salida +=`${base} x ${ i } = ${ base * i }\n`;
+            consola +=(colors.bgBlue(`${base} ${'x'.cyan} ${ i } ${'='.green} ${ base * i }\n`));
+
         }
-    
-        console.log(salida);
         
+        if (listar){
+            console.log(' Tabla del:'.green, colors.blue(base ));
+            console.log(consola);
+
+        }
         
-        fs.writeFileSync(`tabla-${base}.txt`, salida);
+        //crear archivo
+        fs.writeFileSync(`./outs/tabla-${base}.txt`, salida);
     
         return(`tabla-${base}.txt`);
         

@@ -1,5 +1,10 @@
 //desestructurar el objeto recido de multiplicar.js
 const { crearArchivo } = require('./helpers/multiplicar');
+const argv = require('./config/yargs');
+
+//importar paquete de colores
+require('colors');
+
 
 
 //limpia la consola automaticamente
@@ -7,13 +12,18 @@ console.clear();//no funciona para todas las consolas
 process.stdout.write('\033c');//funciona para cmd
 
 
-// console.log(process.argv);// imprime lo arg de consola
+// console.log(process.argv);// imprime los arg de consola
+// console.log(argv);//viene de yargs
 
-//desustructura el arreglo obtenido por consola y asignarle un nombre
-const [ , , arg3 = 'base=5' ] = process.argv;
-//desestructurar el arg3 con ayuda del .split que me los separa  el string por el = y ahora obtengo dos elementoa
-const [ , base = 5 ] = arg3.split('=');
-// console.log( base );
+// console.log('base: yargs', argv.base );
+
+
+// //yano necesito esta dos lineas
+// //desustructura el arreglo obtenido por consola y asignarle un nombre
+// const [ , , arg3 = 'base=5' ] = process.argv;
+// //desestructurar el arg3 con ayuda del .split que me los separa  el string por el = y ahora obtengo dos elementoa
+// const [ , base = 5 ] = arg3.split('=');
+// // console.log( base );
 
 
 
@@ -68,9 +78,9 @@ const [ , base = 5 ] = arg3.split('=');
 
 //comente para pasar el codigo aun nuevo archivo y este quede limpio, ahora necesito llamar ese archivo
 
-crearArchivo( base )
+crearArchivo( argv.base, argv.listar, argv.hasta )
     //toma los nombre del archivo dentro de enta pdad nombreArchivo
-    .then( nombreArchivo => console.log(nombreArchivo, 'creado') )
+    .then( nombreArchivo => console.log(nombreArchivo.trap, 'creado') )
     .catch((err) => console.log (err));
 
 
