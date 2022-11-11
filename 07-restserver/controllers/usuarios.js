@@ -1,9 +1,18 @@
-const { response } = require('express');
+const { response, request } = require('express');
 
 
-const usuariosGet = (req, res = response) => {
+const usuariosGet = (req = request, res = response) => {
+
+    //extraer params de la request.query
+    const { q, nombre = 'Sin nombre', apikey, page = 1, limit } = req.query;
     res.json({
-        msg: 'get API - controlador'
+        msg: 'get API - controlador',
+        //reflejar lo que venga de la query
+        q, 
+        nombre,
+        apikey,
+        page, 
+        limit
     })
 }
 
