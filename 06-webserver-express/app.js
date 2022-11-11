@@ -9,6 +9,7 @@ const app = express()
 //uso el puerto de las variables de entorno
 const port = process.env.PORT;
 
+
 //Handlebars
 //utlizando hbs para rendirizar con express
 app.set('view engine', 'hbs');
